@@ -13,11 +13,13 @@ const ListIconsContainer = styled.section`
   }
 `;
 
+let a = 0
+
 function ListIcons() {
   return (
     <ListIconsContainer>
       {icons.map(icon => (
-        <a href={icon.url}><img src={`/assets/icones/footer/${icon.name}.png`}/></a>
+        <a href={icon.url} key={icon.name}><img alt={`${icon.name}`} src={`/assets/icones/footer/${icon.name}.png`}/></a>
       ))}
     </ListIconsContainer>
   );

@@ -1,18 +1,49 @@
 import styled from "styled-components"
+import Step from "./step"
 
-const NotFoundContainer = styled.section`
-    height: calc(100vh - 443px);
+const StepsContainer = styled.div`
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
 `
+
+const status = 4
 
 function NotFound(){
     return (
-        <NotFoundContainer>
-            <h3>404! Não encontrado</h3>
-            <p></p>
-        </NotFoundContainer>
+        <StepsContainer>
+            <Step 
+                title="Etapa 1"
+                done={status >= 1 ? true : false}
+                active={status === 1 ? true : false}
+                status={status}
+            />
+            <Step 
+                title="Etapa 2"
+                done={status >= 2 ? true : false}
+                active={status === 2 ? true : false}
+                status={status}
+            />
+            <Step 
+                title="Etapa 3"
+                description="Descrição da etapa 3"
+                done={status >= 3 ? true : false}
+                active={status === 3 ? true : false}
+                status={status}
+            />
+            <Step 
+                title="Etapa 4"
+                done={status >= 4 ? true : false}
+                active={status === 4 ? true : false}
+                status={status}
+            />
+            <Step 
+                title="Etapa 5"
+                done={status >= 5 ? true : false}
+                active={status === 5 ? true : false}
+                last={true}
+                status={status}
+            />
+        </StepsContainer>    
     )
 }
 

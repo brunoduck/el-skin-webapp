@@ -16,5 +16,9 @@ function Tag({label,color}){
         </TagContainer>
     )
 }
+Tag.propTypes = {
+    label: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired
+}
 
 export default Tag

@@ -37,7 +37,7 @@ function Menu(){
     return (
         <MenuContainer>
             { MenuItens.map((item) => (
-                <MenuItem><a href={item.url}>{item.label}</a></MenuItem>
+                <MenuItem key={item.label}><a href={item.url}>{item.label}</a></MenuItem>
             ))}
         </MenuContainer>
     )

@@ -9,7 +9,6 @@ const NavBarContainer = styled.div`
     width: 100vw;
     max-width: 1440px;
     grid-area: "navbar";
-
 `
 
 function NavBar(){
