@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft,faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from "react"
+import { http } from "../../http"
 
 const CarouselContainer = styled.div`
     width: 100vw;
@@ -30,14 +31,17 @@ const ButtonMove = styled.button`
     }
 `
 
-const imagens = [
-    "/assets/carousel-1.png",
-    "/assets/carousel-2.png",
-    "/assets/carousel-3.png",
-]
-
 function Carousel(){
     const [imagemAtualIndex, setImagemAtualIndex] = useState(0);
+    const [imagens, setImagens] = useState([{backgroundImage: ''}]);
+
+
+    useEffect(() => {
+        http.get('carousel')
+        .then(response => {
+            setImagens(response.data)
+        })
+    },[])
 
     // Efeito para mudar a imagem automaticamente a cada 3 segundos
     useEffect(() => {
@@ -49,7 +53,7 @@ function Carousel(){
 
         // Limpa o intervalo quando o componente é desmontado
         return () => clearInterval(intervalo);
-    }, []); // O array vazio assegura que o efeito rode apenas uma vez na montagem
+    }, [imagens]); // O array vazio assegura que o efeito rode apenas uma vez na montagem
 
     const irParaProximaImagem = () => {
         setImagemAtualIndex((prevIndex) =>
@@ -65,7 +69,7 @@ function Carousel(){
 
 
     return (
-        <CarouselContainer style={{ backgroundImage: `url(${imagens[imagemAtualIndex]})` }}>
+        <CarouselContainer style={{ backgroundImage: `url(${imagens[imagemAtualIndex].backgroundImage})` }}>
             <ButtonMove onClick={() => irParaProximaImagem()}><FontAwesomeIcon icon={faChevronLeft} /></ButtonMove>
             <ButtonMove onClick={() => irParaImagemAnterior()}><FontAwesomeIcon icon={faChevronRight} /></ButtonMove>
         </CarouselContainer>
