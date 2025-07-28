@@ -24,3 +24,4 @@ yarn-error.log*
 
 /src/pages/NotFound/**
 !/src/pages/NotFound/index.jsx
+/db
