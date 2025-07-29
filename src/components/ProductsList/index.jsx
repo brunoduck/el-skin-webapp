@@ -1,5 +1,7 @@
 import styled from "styled-components"
 import ProductsCard from "./ProductsCard"
+import { http } from "../../http"
+import { useEffect, useState } from "react"
 
 const ProductsListContainer = styled.div`
     width: 100vw;
@@ -25,23 +27,28 @@ const ProductsListItems = styled.div`
 `
 
 function ProductsList(){
+    const [loading,setLoading] = useState(true)
+    const [products,setProducts] = useState([])
+
+    useEffect(() => {
+        http.get('products')
+        .then((response) =>{
+            console.log(response)
+            setLoading(false)
+            setProducts(response.data)
+        })
+    },[])
+
     return (
         <ProductsListContainer>
             <Titulo>nossos queridinhos estão aqui</Titulo>
-            <ProductsListItems>
-                <ProductsCard />
-                <ProductsCard />
-                <ProductsCard />
-                <ProductsCard />
-                <ProductsCard />
-                <ProductsCard />
-                <ProductsCard />
-                <ProductsCard />
-                <ProductsCard />
-                <ProductsCard />
-                <ProductsCard />
-                <ProductsCard />
-            </ProductsListItems>
+            { loading && <p>Carregando...</p> }
+            { !loading && (<ProductsListItems>
+                    { products.map(product => (
+                        <ProductsCard key={product.id} product={product}/>
+                    ))}
+                </ProductsListItems>
+            )}
         </ProductsListContainer>
     )
 }

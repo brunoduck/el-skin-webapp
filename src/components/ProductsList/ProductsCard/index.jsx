@@ -9,6 +9,13 @@ const ProductsCardContainer = styled.div`
     flex-direction: column;
     padding: 20px;
 
+    border: 1px solid #eeeeee;
+    box-shadow: 1px -1px 9px -3px rgba(0,0,0,0.59);
+    -webkit-box-shadow: 1px -1px 9px -3px rgba(0,0,0,0.59);
+    -moz-box-shadow: 1px -1px 9px -3px rgba(0,0,0,0.59);
+
+    border-radius: 5px;
+
     p {
         margin: 10px 0 0 0;
         padding: 5px 0;
@@ -58,18 +65,22 @@ const BuyAction = styled.div`
     }
 `
 
-function ProductsCard(){
+const ProductImg = styled.img`
+    border-radius: 5px;
+`
+
+function ProductsCard({product}){
     return (
         <ProductsCardContainer>
-            <img src="/assets/product.png" />
-            <ProductTitle>Protetor solar AL SUN</ProductTitle>
-            <ProductDescription>alta proteção e pele luminosa sem grude nem pele cinzenta</ProductDescription>
+            <ProductImg src={product.image} alt={product.name} />
+            <ProductTitle>{product.name}</ProductTitle>
+            <ProductDescription>{product.description}</ProductDescription>
             <ProductTags>
                 <Tag label="proteção" color={"#5ED4DC"} />
                 <Tag label="rosto" color={"#DC5EB1"} />
             </ProductTags>
             <ProductFooter>
-                <Price>R$ 79,90</Price>
+                <Price>R$ {String(product.price).replace('.',',')}</Price>
                 <BuyAction>comprar <FontAwesomeIcon icon={faBagShopping} /></BuyAction>
             </ProductFooter>
         </ProductsCardContainer>
