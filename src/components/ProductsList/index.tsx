@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import ProductsCard from "./ProductsCard"
-import { http } from "../../http"
+import { http } from "../../service/http"
 import { useEffect, useState } from "react"
 
 const ProductsListContainer = styled.div`

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faBagShopping } from '@fortawesome/free-solid-svg-icons'
 
 import { useState } from "react";
+import CartDrawer from "../CartDrawer";
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -70,14 +71,22 @@ const ButtonSearch = styled.button`
 
 function Header() {
   const [searchValue,setSearchValue] = useState('')
+  const [isDrawerOpen,setIsDrawerOpen] = useState(false)
 
   function handleOnChange(e){
     setSearchValue(e.target.value)
   }
 
-
   function handleClick(){
     console.log(searchValue)
+  }
+
+  const handleOpenDrawer = () => {
+    setIsDrawerOpen(true)
+  }
+
+  const handleCloseDrawer = () => {
+    setIsDrawerOpen(false)
   }
 
   return (
@@ -88,8 +97,9 @@ function Header() {
         <ButtonSearch type="button" onClick={(e) => handleClick()}><FontAwesomeIcon icon={faMagnifyingGlass} /></ButtonSearch>
       </Search>
       <Options>
-        <button><FontAwesomeIcon icon={faBagShopping} /></button>
+        <button onClick={handleOpenDrawer}><FontAwesomeIcon icon={faBagShopping} /></button>
       </Options>
+      <CartDrawer isOpen={isDrawerOpen} onClose={handleCloseDrawer}/>
     </HeaderContainer>
   );
 }

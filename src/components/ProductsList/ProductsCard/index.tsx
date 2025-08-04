@@ -2,6 +2,8 @@ import styled from "styled-components"
 import Tag from "./Tag"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBagShopping } from '@fortawesome/free-solid-svg-icons'
+import { useCartContext } from "../../../context/CartContext"
+import { useCallback } from "react"
 
 const ProductsCardContainer = styled.div`
     width: calc(25% - 80px);
@@ -70,6 +72,16 @@ const ProductImg = styled.img`
 `
 
 function ProductsCard({product}){
+    const { addItem, getTotalItems } = useCartContext();
+
+    const handleBuyClick = useCallback((event: React.MouseEvent) => {
+        event.stopPropagation()
+
+        console.log(`comprar produto: ${product.id}`)
+
+        addItem(product)
+    })
+
     return (
         <ProductsCardContainer>
             <ProductImg src={product.image} alt={product.name} />
@@ -81,7 +93,7 @@ function ProductsCard({product}){
             </ProductTags>
             <ProductFooter>
                 <Price>R$ {String(product.price).replace('.',',')}</Price>
-                <BuyAction>comprar <FontAwesomeIcon icon={faBagShopping} /></BuyAction>
+                <BuyAction onClick={(e) => handleBuyClick(e)}>comprar <FontAwesomeIcon icon={faBagShopping} /></BuyAction>
             </ProductFooter>
         </ProductsCardContainer>
     )

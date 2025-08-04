@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft,faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from "react"
-import { http } from "../../http"
+import { http } from "../../service/http"
 
 const CarouselContainer = styled.div`
     width: 100vw;

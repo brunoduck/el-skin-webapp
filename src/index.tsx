@@ -4,6 +4,7 @@ import reportWebVitals from "./reportWebVitals";
 
 import Routes from './routes'
 import { createGlobalStyle } from "styled-components";
+import { CartProvider } from "./context/CartContext";
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend+Deca:wght@100..900&display=swap');
@@ -54,7 +55,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <GlobalStyle />
-    <Routes />
+    <CartProvider>
+      <Routes />
+    </CartProvider>
   </React.StrictMode>
 );
 
