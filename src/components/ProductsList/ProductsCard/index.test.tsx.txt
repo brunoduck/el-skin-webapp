@@ -1,0 +1,50 @@
+import '@testing-library/jest-dom';
+import { act, fireEvent, render, screen } from '@testing-library/react';
+import { IProduct } from '../../service/productService';
+import ProductsCard from './index';
+
+const product: IProduct = {
+  id: '1',
+  name: 'Produto Teste',
+  description: 'Descrição do produto teste',
+  price: 99.99,
+  image: 'https://via.placeholder.com/150',
+  tags: [
+    { label: 'Proteção', type: 'protection' },
+    { label: 'Rosto', type: 'face' }
+  ]
+};
+
+const handleBuyClick = jest.fn()
+
+const renderWithAct = async () => {
+  let component;
+  await act(async () => {
+    component = render(<ProductsCard />);
+  });
+  return component;
+};
+
+test('componente ProductCard deve ser renderizado', async () => {
+  
+  await renderWithAct();
+  // Act
+  render(<ProductsCard
+    product={product}
+  />);
+
+  // Assert
+  expect(screen.getByText('Produto Teste')).toBeInTheDocument();
+});
+
+test('deve acionar o método handleBuyClick quando o botão comprar for clicado', () => {
+  render(<ProductsCard
+    product={product}
+  />);
+
+  const button = screen.getByTestId('buy-button');
+  fireEvent.click(button);
+
+//  expect(handleBuyClick).toBeCalledWith('1', expect.any(Object));
+  expect(handleBuyClick).toHaveBeenCalledTimes(1);
+});

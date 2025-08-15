@@ -4,6 +4,7 @@ import { faMagnifyingGlass, faBagShopping } from '@fortawesome/free-solid-svg-ic
 
 import { useState } from "react";
 import CartDrawer from "../CartDrawer";
+import { useCartContext } from "../../context/CartContext";
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -44,6 +45,7 @@ const Options = styled.div`
     cursor: pointer;
     background-color: transparent;
     border-radius: 50%;
+    font-size: 16px;
 
     &:hover {
       background-color: #f2f2f2;
@@ -66,12 +68,25 @@ const ButtonSearch = styled.button`
   &:hover{
     background-color: #e1e1e1;
   }
+`
 
+const BadgeTotalItems = styled.div`
+  width: 16px;
+  height: 16px;
+  border-radius: 16px;
+  background-color: red;
+  font-size: 12px;
+  color: white;
+  text-align: center;
+  position: absolute;
+  top: 24px;
+  
 `
 
 function Header() {
   const [searchValue,setSearchValue] = useState('')
   const [isDrawerOpen,setIsDrawerOpen] = useState(false)
+  const { getTotalItems } = useCartContext();
 
   function handleOnChange(e){
     setSearchValue(e.target.value)
@@ -98,6 +113,7 @@ function Header() {
       </Search>
       <Options>
         <button onClick={handleOpenDrawer}><FontAwesomeIcon icon={faBagShopping} /></button>
+        <BadgeTotalItems>{ getTotalItems() }</BadgeTotalItems>
       </Options>
       <CartDrawer isOpen={isDrawerOpen} onClose={handleCloseDrawer}/>
     </HeaderContainer>

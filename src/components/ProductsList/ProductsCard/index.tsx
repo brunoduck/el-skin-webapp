@@ -93,7 +93,7 @@ function ProductsCard({product}){
             </ProductTags>
             <ProductFooter>
                 <Price>R$ {String(product.price).replace('.',',')}</Price>
-                <BuyAction onClick={(e) => handleBuyClick(e)}>comprar <FontAwesomeIcon icon={faBagShopping} /></BuyAction>
+                <BuyAction data-testid="buy-button" onClick={(e) => handleBuyClick(e)}>comprar <FontAwesomeIcon icon={faBagShopping} /></BuyAction>
             </ProductFooter>
         </ProductsCardContainer>
     )
